@@ -50,10 +50,10 @@ void shoot()
 	{
 		bullets.add(new PlayerBullet());
 		int n = bullets.size();
-		PVector javaCancer = new PVector();
-		javaCancer.x = playerClass.position.x;
-		javaCancer.y = playerClass.position.y;
-		bullets.get(n - 1).position = javaCancer;
+		PVector javaProblem = new PVector();
+		javaProblem.x = playerClass.position.x;
+		javaProblem.y = playerClass.position.y;
+		bullets.get(n - 1).position = javaProblem;
 		bullets.get(n - 1).calcShootDir();
 		frame = 0;
 	}
@@ -246,10 +246,10 @@ private class Asteroid
 		asteroids.add(new Asteroid());
 		if(!destroyAstroid())
 		{
-			PVector javaCancer = new PVector();
-			javaCancer.x = astroidPosition.x;
-			javaCancer.y = astroidPosition.y;
-			asteroids.get(asteroids.size() - 1).astroidPosition = javaCancer;
+			PVector javaProblem = new PVector();
+			javaProblem.x = astroidPosition.x;
+			javaProblem.y = astroidPosition.y;
+			asteroids.get(asteroids.size() - 1).astroidPosition = javaProblem;
 			asteroids.get(asteroids.size() - 1).calcAstroidMovement(false);
 
 			asteroids.get(asteroids.size() - 1).astRadiusX = astRadiusX;
