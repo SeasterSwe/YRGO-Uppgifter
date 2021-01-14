@@ -1,0 +1,14 @@
+void DrawCircle()
+{
+  int n = 20;
+  float r = 80;
+  float middleX = width * 0.5f;
+  float angleDist = 360/n;
+  for (int i = 0; i <= n; ++i) {
+    float x = middleX + r * sin(-angleDist * PI/180 * i + frame * sinSpeed);
+    float y = halfHeight + r * cos(-angleDist * PI/180 * i + frame * sinSpeed);
+
+    point(x, y);
+  }
+  frame++;
+}
