@@ -7,13 +7,13 @@ float distX;
 float halfHeight;
 
 float sinSpeed = 0.04;
-float sinStr = 80;
+float sinStr = 120;
 
 void setup()
 {
 	size(1080, 480);
 	strokeWeight(20);
-	safeMargin = pointSize;
+	safeMargin = pointSize + 40;
 	distX = (width - safeMargin)/numberOfPoints;
 	halfHeight = height * 0.5f;
 
@@ -23,7 +23,7 @@ void setup()
 
 void draw()
 {
-	background(10);
+	background(15);
 
 	strokeWeight(5);
 	stroke(255,100,0);
@@ -51,9 +51,9 @@ void DrawCircleCool (float xPos, float yPos, float speed)
 				line(xPos, yPos, x, y);
   	 		}
 			strokeWeight(10);
-			float cR = 100 + sin((frame) * sinSpeed) * 60;
+			float cR = 100 + sin((frame) * sinSpeed) * 90;
 			float cG = 0;
-			float cB = 200 + sin((frame) * sinSpeed) * 60;
+			float cB = 200 + sin((frame) * sinSpeed) * 90;
 			color c = color(cR, cG, cB);
 			stroke(c);
 		
@@ -79,9 +79,9 @@ void DrawLinesTest()
 		line(x, ySin, x, yCos);
 
 		strokeWeight(5);
-		float cR = 100 + sin((frame +i) * sinSpeed ) * 60;
+		float cR = 100 + sin((frame +i) * sinSpeed ) * 90;
 		float cG = 0;
-		float cB = 200 + sin((frame +i) * sinSpeed) * 60;
+		float cB = 200 + sin((frame +i) * sinSpeed) * 90;
 		color c = color(cR, cG, cB);
 
 		stroke(c);
@@ -92,8 +92,8 @@ void DrawLinesTest()
 
 	}		
 
-	oklart = oklart + 0.2f * dir;
-	oklart2 = oklart2 + 0.2f * -dir;
+	oklart = oklart + 0.5f * dir;
+	oklart2 = oklart2 + 0.5f * -dir;
 	if(oklart >= numberOfPoints || oklart <= 0)
 		dir = dir * -1;
 

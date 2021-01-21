@@ -1,6 +1,6 @@
 
 
-class JakobsWalker implements WalkerInterface {
+class JakBul implements WalkerInterface {
 
   float areaWidth;
   float areaHeight;
@@ -11,18 +11,31 @@ class JakobsWalker implements WalkerInterface {
   float direction;
   float yDirecton;
   color wColor;
+  float safeMargin = 20;
+  float randomYLeangth;
+  float randomXLeangth;
   String getName()
   {
-    return "Jakob"; //When asked, tell them our walkers name
+    return "Ginger Jakob"; //When asked, tell them our walkers name
   }
 
-  PVector getStartPosition(int playAreaWidth, int playAreaHeight, color newColor)
+  PVector getStartPosition(int playAreaWidth, int playAreaHeight)
   {
     //Select a starting position or use a random one.
-    wColor = newColor;
-    areaWidth = playAreaWidth;
-    areaHeight = playAreaHeight;
-    PVector startPos = EdgeStart(playAreaWidth, playAreaHeight, 20);
+
+    float safeMarginFix = 20f/1000f;
+    safeMargin = playAreaWidth * safeMarginFix;
+    
+    areaWidth = playAreaWidth - safeMargin;
+    areaHeight = playAreaHeight - safeMargin;
+
+    float xFix = 1900f/playAreaWidth;
+    float yFix = 1200f/playAreaHeight;
+
+    this.randomYLeangth = 120f/yFix;
+    this.randomXLeangth = 120f/xFix;
+
+    PVector startPos = EdgeStart(playAreaWidth, playAreaHeight, safeMargin);
     float x = startPos.x;
     float y = startPos.y;
     
@@ -43,7 +56,6 @@ class JakobsWalker implements WalkerInterface {
 
   PVector update()
   {
-    stroke(wColor);
 
     if(currentPos.dist(target) < 2)
     {
@@ -79,10 +91,10 @@ class JakobsWalker implements WalkerInterface {
   PVector NewTarget()
   {
     //lekrunt
-    xLeangth = (int)random(1, 40);
-    yLeangth = (int)random(1, 40 - xLeangth);
-    float dx = xLeangth + currentPos.x;
-    if(dx > areaWidth || dx < 0)
+    xLeangth = (int)random(1, randomXLeangth);
+    yLeangth = (int)random(1, randomYLeangth);
+    float dx = (xLeangth * direction) + currentPos.x;
+    if(dx > areaWidth - safeMargin || dx < 0 + safeMargin)
     {
       direction *= -1;
     }
@@ -92,10 +104,10 @@ class JakobsWalker implements WalkerInterface {
   boolean goDown = true;
   PVector YWalk()
   {
-    if(currentPos.y < areaHeight && yDirecton > 0){
+    if(currentPos.y < areaHeight - safeMargin && yDirecton > 0){
       currentPos.add(new PVector(0,1));
       
-      if(currentPos.y == areaHeight)
+      if(currentPos.y == areaHeight - safeMargin)
       {
         yDirecton *= -1;
         target.y = target.y += yLeangth * yDirecton;        
@@ -107,7 +119,7 @@ class JakobsWalker implements WalkerInterface {
     else if(currentPos.y > 0){
       currentPos.add(new PVector(0,-1));
       
-      if(currentPos.y == 0 && yDirecton < 0)
+      if(currentPos.y == 0 + safeMargin && yDirecton < 0)
       {
          yDirecton *= -1;
         target.y += yLeangth * yDirecton;        
